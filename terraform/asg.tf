@@ -16,7 +16,7 @@ resource "aws_launch_template" "webserver_launch_template" {
 
 # creates auto scaling group
 resource "aws_autoscaling_group" "auto_scaling_group" {
-  vpc_zone_identifier           = [aws_subnet.private_appsubnetAZ1.id, aws_subnet.private_appsubnetAZ2.id]
+  vpc_zone_identifier           = [aws_subnet.private_appsubnetaz1.id, aws_subnet.private_appsubnetaz2.id]
   desired_capacity              = 2
   max_size                      = 4
   min_size                      = 1

@@ -1,7 +1,7 @@
 # create DB subnet group
 resource "aws_db_subnet_group" "db_subnet_group" {
   name                        = "db-subnet-group"
-  subnet_ids                  = [aws_subnet.private_datasubnetAZ1.id, aws_subnet.private_datasubnetAZ2.id]
+  subnet_ids                  = [aws_subnet.private_datasubnetaz1.id, aws_subnet.private_datasubnetaz2.id]
   description                 = "subnets for database instances"
 
   tags                        = {

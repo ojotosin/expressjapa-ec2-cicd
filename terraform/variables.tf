@@ -5,14 +5,14 @@ variable "dev_vpc_cidr" {
   
 }
 
-variable "public_subnetAZ1_cidr" {
-    description         = "public subnetAZ1 cidr"
+variable "public_subnetaz1_cidr" {
+    description         = "public subnetaz1 cidr"
     type                = string
   
 }
 
-variable "public_subnetAZ2_cidr" {
-    description         = "public subnetAZ2 cidr"
+variable "public_subnetaz2_cidr" {
+    description         = "public subnetaz2 cidr"
     type                = string
   
 }
@@ -23,26 +23,26 @@ variable "public_rtb_cidr" {
   
 }
 
-variable "private_appsubnetAZ1_cidr" {
-    description         = "private appsubnetAZ1 cidr"
+variable "private_appsubnetaz1_cidr" {
+    description         = "private appsubnetaz1 cidr"
     type                = string
   
 }
 
-variable "private_appsubnetAZ2_cidr" {
-    description         = "private appsubnetAZ2 cidr"
+variable "private_appsubnetaz2_cidr" {
+    description         = "private appsubnetaz2 cidr"
     type                = string
   
 }
 
-variable "private_datasubnetAZ1_cidr" {
-    description         = "private datasubnetAZ1 cidr"
+variable "private_datasubnetaz1_cidr" {
+    description         = "private datasubnetaz1 cidr"
     type                = string
   
 }
 
-variable "private_datasubnetAZ2_cidr" {
-    description         = "private datasubnetAZ2 cidr"
+variable "private_datasubnetaz2_cidr" {
+    description         = "private datasubnetaz2 cidr"
     type                = string
   
 }

@@ -3,14 +3,14 @@ resource "aws_lb" "application_load_balancer" {
   name                              = "dev-alb"
   internal                          = false
   load_balancer_type                = "application"
-  security_groups                   = [aws_security_group.ALB_sg.id]
+  security_groups                   = [aws_security_group.alb_sg.id]
 
   subnet_mapping {
-    subnet_id                       = aws_subnet.public_subnetAZ1.id
+    subnet_id                       = aws_subnet.public_subnetaz1.id
   }
 
   subnet_mapping {
-    subnet_id                       = aws_subnet.public_subnetAZ2.id
+    subnet_id                       = aws_subnet.public_subnetaz2.id
   }
 
   enable_deletion_protection        = false
