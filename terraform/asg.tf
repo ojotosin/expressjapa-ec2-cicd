@@ -5,7 +5,7 @@ resource "aws_launch_template" "webserver_launch_template" {
   instance_type                 = var.ec2_instance_type
   key_name                      = var.ec2_keypair_name
   description                   = "launch template for asg"
-  user_data                     = file("server_bootstrap.sh")
+  user_data                     = base64encode(file("server_bootstrap.sh"))
 
   monitoring {
     enabled = true 
