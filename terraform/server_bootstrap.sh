@@ -1,6 +1,9 @@
 #!/bin/bash
 
 sudo yum update -y
+sudo yum install wget -y
+sudo yum install zip -y
+sudo yum install unzip -y
 
 # install apache 
 sudo yum install -y httpd
@@ -31,8 +34,8 @@ sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
 sudo find /var/www -type f -exec sudo chmod 0664 {} \;
 
 # download the expressjapa zip from s3 to the html directory on the ec2 instance
-sudo aws s3 sync s3://expressjapa-web-files/expressjapa.zip /var/www/html
-
+cd /var/www/html
+sudo wget https://github.com/ojotosin/expressjapa-ec2-cicd/raw/main/expressjapa.zip /var/www/html
 
 # unzip the expressjapa zip folder
 cd /var/www/html
@@ -45,6 +48,7 @@ sudo mv expressjapa/* /var/www/html
 
 # move the hidden files from the expressjapa diretory to the html directory
 sudo mv expressjapa/.htaccess /var/www/html
+sudo mv expressjapa/.editorconfig /var/www/html
 
 
 # delete the expressjapa and expressjapa.zip folder
@@ -63,15 +67,24 @@ sudo sed -i 's/;allow_url_fopen = Off/allow_url_fopen = On/g' "$php_ini_file"
 # Restart the web server 
 sudo service httpd restart
 
-# set permissions
-sudo chmod -R 777 /var/www/html
-sudo chown apache:apache -R /var/www/html
 
-# configuring the database.php file
+
+# configuring the database.php file for ubuntu
 sudo sed -i "/^	'hostname'/ s/=.*$/=> '$RDS_ENDPOINT',/" ./application/config/database.php
 sudo sed -i "/^	'database'/ s/=.*$/=> '$RDS_DB_NAME',/" ./application/config/database.php 
 sudo sed -i "/^	'username'/ s/=.*$/=> '$RDS_MASTER_USERNAME',/" ./application/config/database.php
 sudo sed -i "/^	'password'/ s/=.*$/=> '$RDS_DB_PASSWORD',/" ./application/config/database.php
+
+# configuring the database.php for centos
+# sudo sed -i "s/^[\t ]*'hostname'.*=.*$/'hostname' => 'localhost2',/" ./application/config/database.php
+# sudo sed -i "s/^[\t ]*'database'.*=.*$/'database' => 'mysqldb',/" ./application/config/database.php
+# sudo sed -i "s/^[\t ]*'username'.*=.*$/'username' => 'mysqluser',/" ./application/config/database.php
+# sudo sed -i "s/^[\t ]*'password'.*=.*$/'password' => 'Mysqlpassword1@/" ./application/config/database.php
+
+
+# set permissions
+sudo chmod -R 777 /var/www/html
+sudo chown apache:apache -R /var/www/html
 
 # restart server
 sudo service httpd restart
